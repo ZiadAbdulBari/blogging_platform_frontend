@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer base {
+  html {
+    /* font-family: Inter; */
+  }
+}
+.editor-container {
+  width: 600px;
+  margin: 0 auto;
+}
+
+.editor {
+  border: 1px solid #ccc;
+  padding: 8px;
+}
+
