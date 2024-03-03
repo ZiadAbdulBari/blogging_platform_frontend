@@ -26,6 +26,9 @@ const AddBlog = () => {
       setInputValue({ ...inputValue, image: event.target.files });
     }
   };
+  const handleFocus = (event) => {
+    event.preventDefault();
+  };
   const addBlog = () => {
     if (loggedin) {
       let formData = new FormData();
@@ -34,9 +37,9 @@ const AddBlog = () => {
       for (let i = 0; i < inputValue.image.length; i++) {
         formData.append("images", inputValue.image[i]);
       }
-      makeBlog(formData,token).then((res)=>{
+      makeBlog(formData, token).then((res) => {
         console.log(res);
-      })
+      });
     }
   };
   const getEditorData = (data) => {
@@ -69,6 +72,7 @@ const AddBlog = () => {
               name="title"
               placeholder="Ente your blog title"
               onChange={handleChangeInput}
+              onFocus={handleFocus}
             />
             <UiEditor getEditorData={getEditorData} value={editorData} />
           </div>

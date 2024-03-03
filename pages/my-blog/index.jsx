@@ -11,20 +11,21 @@ const MyBlog = () => {
   const token = useSelector((state) => state.auth.token);
   const [blogLists, setBlogLists] = useState([]);
   const ownBLog = () => {
-    getOwnBlog(token).then((res) => {
-      console.log(res);
-      if (res.status == 200) {
-        setBlogLists(res.list);
-      }
-    });
+    if(loggedin){
+      getOwnBlog(token).then((res) => {
+        if (res.status == 200) {
+          setBlogLists(res.list);
+        }
+      });
+    }
   };
   useEffect(() => {
     dispatch(getLoggedinStatus());
     dispatch(getToken());
-  }, []);
+  }, [loggedin]);
   useEffect(() => {
     ownBLog();
-  }, []);
+  }, [loggedin]);
   return (
     <MainLayout>
       <div className="container mx-auto">
