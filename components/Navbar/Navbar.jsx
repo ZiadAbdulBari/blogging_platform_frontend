@@ -5,6 +5,13 @@ import { getLoggedinStatus, getToken } from "@/store/authSlice";
 const Navbar = () => {
   const loggedinStatus = useSelector((state) => state.auth.isLoggedin);
   const dispatch = useDispatch();
+  const logout = () => {
+    window.localStorage.removeItem("isLoggedin");
+    window.localStorage.removeItem("token");
+    dispatch(getLoggedinStatus());
+    dispatch(getToken());
+    router.push("/");
+  };
   useEffect(() => {
     dispatch(getLoggedinStatus());
     dispatch(getToken());
@@ -33,7 +40,7 @@ const Navbar = () => {
                 <Link href="/add-blog" className="text-white font-semibold">
                   Add blog
                 </Link>
-                <Link href="/" className="text-white font-semibold">
+                <Link href="/" className="text-white font-semibold" onClick={logout}>
                   Logout
                 </Link>
               </>
