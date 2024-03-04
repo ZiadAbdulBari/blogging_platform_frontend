@@ -20,7 +20,9 @@ const Navbar = () => {
     <div className="bg-blue-500 h-[80px] w-full flex items-center">
       <div className="container mx-auto">
         <div className="flex justify-between items-center">
-          <h1 className="font-bold text-[25px] text-white">Blog</h1>
+          <Link href="/">
+            <h1 className="font-bold text-[25px] text-white">Blog</h1>
+          </Link>
           <div className="flex gap-4">
             {!loggedinStatus && (
               <>
@@ -40,7 +42,11 @@ const Navbar = () => {
                 <Link href="/add-blog" className="text-white font-semibold">
                   Add blog
                 </Link>
-                <Link href="/" className="text-white font-semibold" onClick={logout}>
+                <Link
+                  href="/"
+                  className="text-white font-semibold"
+                  onClick={logout}
+                >
                   Logout
                 </Link>
               </>

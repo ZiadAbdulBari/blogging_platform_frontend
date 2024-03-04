@@ -56,3 +56,13 @@ export const getOwnBlog = async (token) => {
     return error.response;
   }
 };
+export const readFullBlog = async (id) => {
+  try {
+    const response = await axios.get(
+      `${process.env.baseurl}/blog/blog-detail/${id}`
+    );
+    return response.data;
+  } catch (error) {
+    return error.response;
+  }
+};
