@@ -29,6 +29,9 @@ const Auth = ({ pageName, text, link }) => {
         toastMessage(res?.message, "s");
         router.push("/");
       }
+      else{
+        toastMessage(res?.data?.message, "e");
+      }
     });
   };
   const userRegistration = () => {
@@ -92,8 +95,8 @@ const Auth = ({ pageName, text, link }) => {
               {pageName == "Registration" ? "Login" : "Registration"}
             </Link>
           </p>
-          <div className="text-center bg-blue-500 py-2 text-white text-[18px]">
-            <button className="button" onClick={authCnotroller}>
+          <div className="text-center bg-blue-500 py-2 text-white text-[18px]" onClick={authCnotroller}>
+            <button className="button">
               {pageName}
             </button>
           </div>
