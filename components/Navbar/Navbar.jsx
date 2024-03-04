@@ -1,10 +1,13 @@
 import Link from "next/link";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getLoggedinStatus, getToken } from "@/store/authSlice";
+import UiInput from "../UiKit/UiInput";
+import { blogSearch } from "@/services/services";
 const Navbar = () => {
   const loggedinStatus = useSelector((state) => state.auth.isLoggedin);
   const dispatch = useDispatch();
+  const [search,setSearch] = useState('');
   const logout = () => {
     window.localStorage.removeItem("isLoggedin");
     window.localStorage.removeItem("token");
@@ -12,6 +15,12 @@ const Navbar = () => {
     dispatch(getToken());
     router.push("/");
   };
+  const searchBlog = (event)=>{
+    event.preventDefault();
+    blogSearch(search).then((res)=>{
+      console.log(res)
+    })
+  }
   useEffect(() => {
     dispatch(getLoggedinStatus());
     dispatch(getToken());
@@ -23,6 +32,18 @@ const Navbar = () => {
           <Link href="/">
             <h1 className="font-bold text-[25px] text-white">Blog</h1>
           </Link>
+          <div className="flex">
+            <UiInput
+              type="text"
+              id="search"
+              label=""
+              name="search"
+              placeholder="Search blog"
+              value={search}
+              onChange={(event)=>setSearch(event.target.value)}
+            />
+            <button onClick={searchBlog} className="text-blue-500 rounded px-[5px] bg-white">Search</button>
+          </div>
           <div className="flex gap-4">
             {!loggedinStatus && (
               <>

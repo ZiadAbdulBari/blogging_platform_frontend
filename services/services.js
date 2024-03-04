@@ -66,3 +66,13 @@ export const readFullBlog = async (id) => {
     return error.response;
   }
 };
+export const blogSearch = async (searchkey) => {
+  try {
+    const response = await axios.post(
+      `${process.env.baseurl}/blog/blog-search`,searchkey
+    );
+    return response.data;
+  } catch (error) {
+    return error.response;
+  }
+};
