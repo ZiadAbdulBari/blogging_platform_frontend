@@ -46,9 +46,9 @@ export const makeBlog = async (data, token) => {
     return error.response;
   }
 };
-export const getOwnBlog = async (token) => {
+export const getOwnBlog = async (token,page) => {
   try {
-    const response = await axios.get(`${process.env.baseurl}/blog/own-blog`, {
+    const response = await axios.get(`${process.env.baseurl}/blog/own-blog?page=${page}&pageSize=2}`, {
       headers: { Authorization: token },
     });
     return response.data;
