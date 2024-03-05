@@ -22,8 +22,8 @@ const UiEditor = ({ getEditorData, value }) => {
     getEditorData(data);
   };
   return (
-    <div className="mt-4">
-      <p className="mb-4">Blog Content</p>
+    <div className="">
+      <p className="mb-2">Blog Content</p>
       <CKEditor
         editor={ClassicEditor}
         data={value}

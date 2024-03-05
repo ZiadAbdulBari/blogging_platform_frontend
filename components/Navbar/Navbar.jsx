@@ -4,7 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { getLoggedinStatus, getToken } from "@/store/authSlice";
 import UiInput from "../UiKit/UiInput";
 import { blogSearch } from "@/services/services";
+import { useRouter } from "next/router";
 const Navbar = () => {
+  const router = useRouter();
   const loggedinStatus = useSelector((state) => state.auth.isLoggedin);
   const dispatch = useDispatch();
   const [search,setSearch] = useState('');
@@ -17,9 +19,8 @@ const Navbar = () => {
   };
   const searchBlog = (event)=>{
     event.preventDefault();
-    blogSearch(search).then((res)=>{
-      console.log(res)
-    })
+    const sText = search.replaceAll(" ", "-");
+    router.push(`/search/${sText}`);
   }
   useEffect(() => {
     dispatch(getLoggedinStatus());

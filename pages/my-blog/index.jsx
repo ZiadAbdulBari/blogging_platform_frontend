@@ -13,6 +13,7 @@ const MyBlog = () => {
   const ownBLog = () => {
     if(loggedin){
       getOwnBlog(token).then((res) => {
+        console.log(res)
         if (res.status == 200) {
           setBlogLists(res.list);
         }
