@@ -4,19 +4,28 @@ import { getBlog } from "@/services/services";
 import { useDispatch } from "react-redux";
 import { getLoggedinStatus, getToken } from "@/store/authSlice";
 import { useEffect, useState } from "react";
+import Pagination from "@/components/Pagination/Pagination";
 export default function Home() {
   const dispatch = useDispatch();
   const [blogLists, setBlogLists] = useState([]);
+  const [page,setPage] = useState(1);
+  const [totalPage,setTotalPage] = useState(0);
   const getBlogList = () => {
-    getBlog().then((response) => {
+    getBlog(page).then((response) => {
       if (response.status == 200) {
-        setBlogLists(response.list);
+        setPage(response.list.currentpage);
+        setTotalPage(response.list.totalPage);
+        setBlogLists(response.list.list);
       }
     });
   };
+  const handlePagination = (pagenumber)=>{
+    setPage(pagenumber);
+    console.log(pagenumber)
+  }
   useEffect(() => {
     getBlogList();
-  }, []);
+  }, [page]);
   useEffect(() => {
     dispatch(getLoggedinStatus());
     dispatch(getToken());
@@ -32,6 +41,7 @@ export default function Home() {
                   <BlogCard key={index} blog={blog} />
                 ))}
             </div>
+            <Pagination totalPage={totalPage} currentPage={page} onClick={handlePagination}/>
           </div>
         </div>
       </MainLayout>

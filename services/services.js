@@ -23,9 +23,9 @@ export const login = async (email, password) => {
     return error.response;
   }
 };
-export const getBlog = async () => {
+export const getBlog = async (page) => {
   try {
-    const response = await axios.get(`${process.env.baseurl}/blog/list-blog`);
+    const response = await axios.get(`${process.env.baseurl}/blog/list-blog?page=${page}&pageSize=2}`);
     return response.data;
   } catch (error) {
     return error.response;
